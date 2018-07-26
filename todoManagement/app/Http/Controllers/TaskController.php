@@ -18,7 +18,11 @@ class TaskController extends Controller
      */
     public function get_all($status)
     {
-        $tasks= DB::table('tasks')->where('status',$status)->get();
+        $tasks= DB::table('tasks')
+        ->where([
+                ['status',$status],
+                ['deleted','false']])
+                ->get();
         return response($tasks);
     }
 
@@ -32,6 +36,14 @@ class TaskController extends Controller
     public function add(Request $request)
     {
         $task = $request->input('task');
+        DB::table('tasks')
+            ->insert(['name' => $task->name,
+                    'content' => $task->content,
+                    'date' => now(),
+                    'priority' => false,
+                    'status' => 'pending',
+                    'user' => 'implement',
+                    'deleted' => false]);
 
         return 'Still in progress';
     }
@@ -45,7 +57,7 @@ class TaskController extends Controller
      */
     public function delete($id)
     {
-        DB::table('tasks')->where('id',$id)->update(['deleted' => false]);
+        DB::table('tasks')->where('id', $id)->update(['deleted' => false]);
         return response('200');
     }
 
