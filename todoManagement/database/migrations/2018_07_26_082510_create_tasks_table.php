@@ -21,7 +21,7 @@ class CreateTasksTable extends Migration
             $table->string('priority');
             $table->string('status');
             $table->string('user');
-            $table->string('deleted');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

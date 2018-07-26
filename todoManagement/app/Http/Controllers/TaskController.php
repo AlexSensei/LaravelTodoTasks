@@ -57,7 +57,7 @@ class TaskController extends Controller
      */
     public function delete($id)
     {
-        DB::table('tasks')->where('id', $id)->update(['deleted' => false]);
+        DB::table('tasks')->where('id', $id)->delete();
         return response('200');
     }
 

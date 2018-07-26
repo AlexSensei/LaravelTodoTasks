@@ -15,10 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/tasks/{status}', 'TaskController@get_all');
+Route::get('/tasks/{status}', 'TasksController@index');
 
-Route::post('/tasks/add', 'TaskController@add');
+Route::get('/tasks/{id}', 'TasksController@show');
 
-Route::put('/tasks/delete/{id}', 'TaskController@delete');
+Route::delete('/tasks/delete/{id}', 'TasksController@destroy');
 
-Route::put('/tasks/update/{id}', 'TaskController@update');
+Route::put('/tasks/update/{id}', 'TasksController@update');
