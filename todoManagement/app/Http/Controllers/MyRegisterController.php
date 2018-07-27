@@ -9,6 +9,12 @@ class MyRegisterController extends Controller
 {
     protected function create(Request $request)
     {
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string',
+        ]);
         \Log::info($request);
         $name = $request->input('name');
         $email = $request->input('email');
