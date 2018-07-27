@@ -15,7 +15,7 @@ class MyRegisterController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string',
         ]);
-        \Log::info($request);
+
         $name = $request->input('name');
         $email = $request->input('email');
         $password = $request->input('password');

@@ -12,16 +12,11 @@ class TasksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($status)
+    public function index()
     {
         $user = auth()->user();
 
-        $task= DB::table('tasks')
-        ->where([
-                ['status', $status],
-                ['user', $user->email]])
-                ->get();
-        return response($task);
+        return response($user->tasks);
     }
 
     /**
@@ -42,7 +37,7 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Task::create($request->all());
     }
 
     /**
@@ -56,9 +51,7 @@ class TasksController extends Controller
         $user = auth()->user();
 
         $task= DB::table('tasks')
-        ->where([
-                ['id', $id],
-                ['user', $user->email]])
+        ->where('id', $id)
                 ->get();
         return response($task);
     }
@@ -95,11 +88,6 @@ class TasksController extends Controller
      */
     public function destroy($id)
     {
-        $user = auth()->user();
-
-        DB::table('tasks')->where([
-            ['id', $id],
-            ['user', $user->email]])->delete();
-        return response('200');
+        return Task::destroy($id);
     }
 }

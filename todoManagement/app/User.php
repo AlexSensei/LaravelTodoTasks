@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Task;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -19,6 +20,17 @@ class User extends Authenticatable implements JWTSubject
         'name', 'email', 'password',
     ];
 
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
+    // public function tasks_by_status($status)
+    // {
+    //     return Task::where([
+    //         ['status', '=', $status],
+    //         ['user_id', '=', $this->id]
+    //     ])
+    // }
     /**
      * The attributes that should be hidden for arrays.
      *
