@@ -16,7 +16,7 @@ class TasksController extends Controller
     {
         $user = auth()->user();
 
-        $task= DB::table('task')
+        $task= DB::table('tasks')
         ->where([
                 ['status', $status],
                 ['user', $user->email]])
@@ -55,7 +55,7 @@ class TasksController extends Controller
     {
         $user = auth()->user();
 
-        $task= DB::table('task')
+        $task= DB::table('tasks')
         ->where([
                 ['id', $id],
                 ['user', $user->email]])
@@ -83,7 +83,7 @@ class TasksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $task = $request->input('task');
+        $task = $request->input('tasks');
         $task->save();
     }
 

@@ -22,3 +22,5 @@ Route::get('/tasks/{id}', 'TasksController@show');
 Route::delete('/tasks/delete/{id}', 'TasksController@destroy');
 
 Route::put('/tasks/update/{id}', 'TasksController@update');
+
+//Route::post('/register', 'AuthController@create');
