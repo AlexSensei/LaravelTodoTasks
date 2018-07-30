@@ -51,7 +51,7 @@ class TasksController extends Controller
     public function show($id)
     {
         $user = auth()->user();
-        return response($user->tasks->where('id',$id));
+        return response($user->tasks->where('id',$id)->first());
     }
 
     /**
