@@ -15,14 +15,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/tasks/{status}', 'TasksController@index');
-
-Route::get('/tasks/{id}', 'TasksController@show');
-
-Route::post('/tasks', 'TasksController@store');
-
-Route::delete('/tasks/delete/{id}', 'TasksController@destroy');
-
-Route::put('/tasks/update/{id}', 'TasksController@update');
-
-//Route::post('/register', 'AuthController@create');
+Route::resource('tasks', 'TasksController');

@@ -37,6 +37,7 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
+        \Log::info("123");
         return Task::create($request->all());
     }
 
