@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DB;
+use App\Task;
 use Illuminate\Http\Request;
 
 class TasksController extends Controller
@@ -15,7 +16,6 @@ class TasksController extends Controller
     public function index()
     {
         $user = auth()->user();
-
         return response($user->tasks);
     }
 
@@ -37,7 +37,8 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
-        \Log::info("123");
+
+        $request->request->add(['user_id' => auth()->user()->id]);
         return Task::create($request->all());
     }
 
@@ -50,11 +51,7 @@ class TasksController extends Controller
     public function show($id)
     {
         $user = auth()->user();
-
-        $task= DB::table('tasks')
-        ->where('id', $id)
-                ->get();
-        return response($task);
+        return response($user->tasks->where('id',$id));
     }
 
     /**
@@ -77,8 +74,9 @@ class TasksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $task = $request->input('tasks');
-        $task->save();
+        \Log::info($request);
+        $task = Task::find($id);;
+        $task->update($request->all());
     }
 
     /**

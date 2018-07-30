@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 class Task extends Model
 {
 
@@ -15,7 +15,7 @@ class Task extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'content', 'priority', 'is_done'
+        'name', 'content', 'priority', 'is_done' ,'user_id'
     ];
 
     public function user()
